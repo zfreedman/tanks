@@ -39,13 +39,13 @@ public static class GameInput
 	public static void UpdateMoveInput()
 	{
 		_moveInput = Vector2.zero;
-		if( Input.GetKey( KeyCode.UpArrow ) )
+		if( Input.GetKey( KeyCode.UpArrow ) || Input.GetKey( KeyCode.W ) )
 			_moveInput += Vector3.forward * Time.deltaTime;
-		if( Input.GetKey( KeyCode.DownArrow ) )
+		if( Input.GetKey( KeyCode.DownArrow ) || Input.GetKey( KeyCode.S ) )
 			_moveInput -= Vector3.forward * Time.deltaTime;
-		if( Input.GetKey( KeyCode.RightArrow ) )
+		if( Input.GetKey( KeyCode.RightArrow ) || Input.GetKey( KeyCode.D ) )
 			_moveInput += Vector3.right * Time.deltaTime;
-		if( Input.GetKey( KeyCode.LeftArrow ) )
+		if( Input.GetKey( KeyCode.LeftArrow ) || Input.GetKey( KeyCode.A ) )
 			_moveInput -= Vector3.right * Time.deltaTime;
 	}
 

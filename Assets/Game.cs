@@ -41,8 +41,7 @@ public class Game : MonoBehaviour
 		_cam = Camera.main;
 		CameraController camController =
 			_cam.gameObject.AddComponent<CameraController>();
-		_player = GameObject.CreatePrimitive( PrimitiveType.Cube )
-				.AddComponent<Player>();
+		_player = Player.NewPlayer();
 		camController.Focus = _player.transform;
 	}
 

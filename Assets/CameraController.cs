@@ -18,6 +18,16 @@ public class CameraController : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Gets or sets the rotation of the camera.
+	/// </summary>
+	/// <value>The rotation.</value>
+	public Quaternion Rotation
+	{
+		get { return _rotation; }
+		set { _rotation = value; }
+	}
+
+	/// <summary>
 	/// Gets or sets the position of the camera relative to focus.
 	/// </summary>
 	/// <value>The position relative to focus.</value>
@@ -27,11 +37,6 @@ public class CameraController : MonoBehaviour
 		set { _positionRelativeToFocus = value; }
 	}
 
-	public Quaternion Rotation
-	{
-		get { return _rotation; }
-		set { _rotation = value; }
-	}
 
 	// Unity awake
 	void Awake()
