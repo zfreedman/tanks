@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Cannon : MonoBehaviour
 {
 	CannonController _cannonController;
+	LinkedList<Bullet> _loadedBullets;
+	LinkedList<Bullet> _unloadedBullets;
 
 	/// <summary>
 	/// Gets or sets a the cannon controller.
@@ -18,6 +21,8 @@ public class Cannon : MonoBehaviour
 	void Awake()
 	{
 		_cannonController = new CannonController( this );
+		_loadedBullets = new LinkedList<Bullet>();
+		_unloadedBullets = new LinkedList<Bullet>();
 	}
 	
 	/// <summary>
@@ -32,11 +37,21 @@ public class Cannon : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Updates the cannon physics.
+	/// </summary>
+	/// <param name="deltaTime">Delta time.</param>
+	public void PhysicsUpdate( float deltaTime )
+	{
+	}
+
+	/// <summary>
 	/// Fires the cannon.
 	/// </summary>
 	public void Fire()
 	{
 		print( "Firing cannon" );
+		Bullet bullet = Bullet.NewBullet( this );
+		_unloadedBullets.AddLast( bullet );
 		_cannonController.QueuedToFire = false;
 		_cannonController.TimeTillCanFire = _cannonController.Reload * _cannonController.ReloadMult;
 	}
@@ -48,7 +63,6 @@ public class Cannon : MonoBehaviour
 	public static Cannon NewCannon()
 	{
 		GameObject go = Instantiate( Resources.Load<GameObject>( "Base Cannon GO" ) );
-		go.name = "New Cannon";
 		return go.AddComponent<Cannon>();
 	}
 }

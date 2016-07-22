@@ -7,11 +7,11 @@ public static class ProgressionData
 	static float _baseCannonDamage = 1.0f;
 	static Vector3 _baseCannonPosition = Vector3.forward * .5f;
 	static float _baseCannonRange = 10.0f;
-	static float _baseCannonReload = 3.0f;
+	static float _baseCannonReload = .1f;
 	static Quaternion _baseCannonRotation = Quaternion.Euler( Vector3.right * 90 );
 	static float _baseCannonSize = 1.0f;
 	static float _baseCannonTimeTillNextFire = 0.0f;
-	static float _baseCannonVel = 50.0f;
+	static float _baseCannonVel = 10.0f;
 
 	static float _baseMult = 1.0f;
 

@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
 	// Unity fixed update
 	void FixedUpdate()
 	{
-		_tank.PhysicsUpdate( GameInput.MoveInput );
+		_tank.PhysicsUpdate( GameInput.MoveInput, Time.deltaTime );
 	}
 
 	// Unity update

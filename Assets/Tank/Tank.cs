@@ -42,18 +42,26 @@ public class Tank : MonoBehaviour
 	// Unity awake
 	void Awake()
 	{
+		_cannons = new List<Cannon>();
 		_tankDataController = new TankDataController( this );
 		_tankMoveController = new TankMoveController( this );
-		_cannons = new List<Cannon>();
+		_tankMoveController.TankDataController = _tankDataController;
 	}
 
 	/// <summary>
-	/// Updates the tank physics.
+	/// Updates the 3D attributes of this tank to reflect a form change.
 	/// </summary>
-	/// <param name="moveInpupt">Move inpupt.</param>
-	public void PhysicsUpdate( Vector3 moveInput )
+	public void ChangeForm( TankData data )
 	{
-		_tankMoveController.PhysicsUpdate( moveInput );
+		DestroyAllCannons();
+		for( int i = 0; i < data.CannonData.Length; ++i )
+		{
+			_cannons.Add( Cannon.NewCannon() );
+			_cannons[i].transform.parent = transform;
+			_cannons[i].transform.name = data.CannonData[i].Name;
+			_cannons[i].transform.position = data.CannonData[i].Position;
+			_cannons[i].transform.rotation = data.CannonData[i].Rotation;
+		}
 	}
 
 	/// <summary>
@@ -77,20 +85,6 @@ public class Tank : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Levels up the tank.
-	/// </summary>
-	public void LevelUp( int levelDelta )
-	{
-		if( ProgressionData.TankLevelFormsDictionary.ContainsKey( _player.Level ) )
-		{
-			TankData data = ProgressionData.TankLevelFormsDictionary[_player.Level][0];
-			ChangeForm( data );
-			_tankDataController.ChangeForm( data );
-
-		}
-	}
-
-	/// <summary>
 	/// Destroies all cannons attached to this tank.
 	/// </summary>
 	public void DestroyAllCannons()
@@ -103,18 +97,27 @@ public class Tank : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Updates the 3D attributes of this tank to reflect a form change.
+	/// Levels up the tank.
 	/// </summary>
-	public void ChangeForm( TankData data )
+	public void LevelUp( int levelDelta )
 	{
-		DestroyAllCannons();
-		for( int i = 0; i < data.CannonData.Length; ++i )
+		if( ProgressionData.TankLevelFormsDictionary.ContainsKey( _player.Level ) )
 		{
-			_cannons.Add( Cannon.NewCannon() );
-			_cannons[i].transform.parent = transform;
-			_cannons[i].transform.name = data.CannonData[i].Name;
-			_cannons[i].transform.position = data.CannonData[i].Position;
-			_cannons[i].transform.rotation = data.CannonData[i].Rotation;
+			TankData data = ProgressionData.TankLevelFormsDictionary[_player.Level][0];
+			ChangeForm( data );
+			_tankDataController.ChangeForm( data );
 		}
+	}
+
+	/// <summary>
+	/// Updates the tank physics.
+	/// </summary>
+	/// <param name="moveInput">Move input.</param>
+	/// <param name="deltaTime">Delta time.</param>
+	public void PhysicsUpdate( Vector3 moveInput, float deltaTime )
+	{
+		_tankMoveController.PhysicsUpdate( moveInput, deltaTime );
+		for( int i = 0; i < _cannons.Count; ++i )
+			_cannons[i].PhysicsUpdate( deltaTime );
 	}
 }
