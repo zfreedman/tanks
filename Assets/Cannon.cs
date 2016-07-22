@@ -23,8 +23,23 @@ public class Cannon : MonoBehaviour
 	// Unity update
 	void Update()
 	{
+		_cannonController.Update( Time.deltaTime );
 	}
 
+	/// <summary>
+	/// Fires the cannon.
+	/// </summary>
+	public void Fire()
+	{
+		print( "Firing cannon" );
+		_cannonController.QueuedToFire = false;
+		_cannonController.TimeTillCanFire = _cannonController.Reload * _cannonController.ReloadMult;
+	}
+
+	/// <summary>
+	/// Returns a new cannon game object.
+	/// </summary>
+	/// <returns>The cannon.</returns>
 	public static Cannon NewCannon()
 	{
 		GameObject go = Instantiate( Resources.Load<GameObject>( "Base Cannon GO" ) );

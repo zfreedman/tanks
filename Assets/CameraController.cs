@@ -44,8 +44,8 @@ public class CameraController : MonoBehaviour
 		transform.rotation = _rotation;
 	}
 	
-	// Unity update
-	void Update()
+	// Unity late update
+	void LateUpdate()
 	{
 		if( _focus != null )
 		{

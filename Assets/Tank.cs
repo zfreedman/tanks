@@ -57,6 +57,13 @@ public class Tank : MonoBehaviour
 	void Update()
 	{
 		_tankMoveController.NonPhysicsUpdate();
+
+		// Check to fire cannons
+		for( int i = 0; i < _cannons.Count; ++i )
+		{
+			if( _cannons[i].CannonController.QueuedToFire )
+				_cannons[i].Fire();
+		}
 	}
 
 	/// <summary>
@@ -69,6 +76,7 @@ public class Tank : MonoBehaviour
 			TankData data = ProgressionData.TankLevelFormsDictionary[_player.Level][0];
 			ChangeForm( data );
 			_tankDataController.ChangeForm( data );
+
 		}
 	}
 

@@ -50,4 +50,10 @@ public class Game : MonoBehaviour
 	{
 		GameInput.Update();
 	}
+
+	// Unity late update
+	void LateUpdate()
+	{
+		GameInput.LateUpdate();
+	}
 }

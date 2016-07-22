@@ -3,13 +3,17 @@ using System.Collections;
 
 public class TankDataController
 {
-	float _accelMult;
-	float _accel;
-	float _drag;
-	float _dragMult;
-	Tank _tank;
-	float _vel;
-	float _velMult;
+	protected float _accel;
+	protected float _accelMult;
+	protected float _drag;
+	protected float _dragMult;
+	protected float _health;
+	protected float _healthMult;
+	protected float _regen;
+	protected float _regenMult;
+	protected Tank _tank;
+	protected float _vel;
+	protected float _velMult;
 
 	/// <summary>
 	/// Gets or sets the acceleration.
@@ -52,6 +56,42 @@ public class TankDataController
 	}
 
 	/// <summary>
+	/// Gets the health.
+	/// </summary>
+	/// <value>The health.</value>
+	public float Health
+	{
+		get { return _health; }
+	}
+
+	/// <summary>
+	/// Gets the health multiplier.
+	/// </summary>
+	/// <value>The health multiplier.</value>
+	public float HealthMult
+	{
+		get { return _healthMult; }
+	}
+
+	/// <summary>
+	/// Gets the regen.
+	/// </summary>
+	/// <value>The regen.</value>
+	public float Regen
+	{
+		get { return _regen; }
+	}
+
+	/// <summary>
+	/// Gets the regen multiplier.
+	/// </summary>
+	/// <value>The regen multiplier.</value>
+	public float RegenMult
+	{
+		get { return _regenMult; }
+	}
+
+	/// <summary>
 	/// Gets the tank.
 	/// </summary>
 	/// <value>The tank.</value>
@@ -87,22 +127,28 @@ public class TankDataController
 	public TankDataController( Tank tank )
 	{
 		_tank = tank;
-		_accelMult = ProgressionData.BaseMult;
 		_accel = ProgressionData.BaseTankAccel;
+		_accelMult = ProgressionData.BaseMult;
 		_drag = ProgressionData.BaseTankDrag;
 		_dragMult = ProgressionData.BaseMult;
+		_health = ProgressionData.BaseTankHealth;
+		_healthMult = ProgressionData.BaseMult;
+		_regen = ProgressionData.BaseTankRegen;
+		_regenMult = ProgressionData.BaseMult;
 		_vel = ProgressionData.BaseTankVel;
 		_velMult = ProgressionData.BaseMult;
 	}
 
 	/// <summary>
-	/// Updates the attributes of this tank to reflect a form change.
+	/// Updates the data attributes of this tank to reflect a form change.
 	/// </summary>
 	/// <param name="data">Data.</param>
 	public void ChangeForm( TankData data )
 	{
 		_accelMult = data.AccelMult;
 		_dragMult = data.DragMult;
+		_healthMult = data.HealthMult;
+		_regenMult = data.RegenMult;
 		_velMult = data.VelMult;
 	}
 }

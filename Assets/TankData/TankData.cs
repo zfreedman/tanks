@@ -6,6 +6,8 @@ public class TankData
 	protected float _accelMult;
 	protected CannonData[] _cannonData;
 	protected float _dragMult;
+	protected float _healthMult;
+	protected float _regenMult;
 	protected float _velMult;
 
 	/// <summary>
@@ -32,6 +34,24 @@ public class TankData
 	public float DragMult
 	{
 		get { return _dragMult; }
+	}
+
+	/// <summary>
+	/// Gets the health multiplier.
+	/// </summary>
+	/// <value>The health multiplier.</value>
+	public float HealthMult
+	{
+		get { return _healthMult; }
+	}
+
+	/// <summary>
+	/// Gets the regen multiplier.
+	/// </summary>
+	/// <value>The regen multiplier.</value>
+	public float RegenMult
+	{
+		get { return _regenMult; }
 	}
 
 	/// <summary>
