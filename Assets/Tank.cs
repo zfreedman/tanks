@@ -47,20 +47,30 @@ public class Tank : MonoBehaviour
 		_cannons = new List<Cannon>();
 	}
 
-	// Unity fixed update
-	void FixedUpdate()
+	/// <summary>
+	/// Updates the tank physics.
+	/// </summary>
+	/// <param name="moveInpupt">Move inpupt.</param>
+	public void PhysicsUpdate( Vector3 moveInput )
 	{
-		_tankMoveController.PhysicsUpdate();
+		_tankMoveController.PhysicsUpdate( moveInput );
 	}
 
-	// Unity update
-	void Update()
+	/// <summary>
+	/// Updates the tank data and actions.
+	/// </summary>
+	/// <param name="worldMousePosition">World mouse position.</param>
+	/// <param name="deltaTime">Delta time.</param>
+	/// <param name="autoFireEnabled">Auto fire enabled.</param>
+	/// <param name="fireRequested">Fire requested.</param>
+	public void DataAndActionUpdate( Vector3 worldMousePosition, float deltaTime, bool autoFireEnabled,
+	                                 bool fireRequested )
 	{
-		_tankMoveController.NonPhysicsUpdate();
-
+		_tankMoveController.NonPhysicsUpdate( worldMousePosition );
 		// Check to fire cannons
 		for( int i = 0; i < _cannons.Count; ++i )
 		{
+			_cannons[i].DataAndActionUpdate( deltaTime, autoFireEnabled, fireRequested );
 			if( _cannons[i].CannonController.QueuedToFire )
 				_cannons[i].Fire();
 		}

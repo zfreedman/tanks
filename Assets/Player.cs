@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 	int _experience = 0;
 	int _score = 0;
 
-	public delegate void LevelUpDelegate(int level);
+	public delegate void LevelUpDelegate( int level );
 	public event LevelUpDelegate LevelUp;
 
 	/// <summary>
@@ -45,6 +45,20 @@ public class Player : MonoBehaviour
 		_tank.Player = this;
 		LevelUp += new LevelUpDelegate( _tank.LevelUp );
 		SetLevel( 1 );
+	}
+
+	// Unity fixed update
+	void FixedUpdate()
+	{
+		_tank.PhysicsUpdate( GameInput.MoveInput );
+	}
+
+	// Unity update
+	void Update()
+	{
+		Vector3 worldMousePos = Game.Camera.ScreenToWorldPoint( new Vector3( GameInput.RotateInput.x,
+			                        GameInput.RotateInput.y, Game.Camera.transform.position.y ) );
+		_tank.DataAndActionUpdate( worldMousePos, Time.deltaTime, GameInput.AutoFireEnabled, GameInput.FireRequested );
 	}
 
 	/// <summary>

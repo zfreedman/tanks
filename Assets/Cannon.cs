@@ -20,10 +20,15 @@ public class Cannon : MonoBehaviour
 		_cannonController = new CannonController( this );
 	}
 	
-	// Unity update
-	void Update()
+	/// <summary>
+	/// Update the data and actions of this cannon.
+	/// </summary>
+	/// <param name="deltaTime">Delta time.</param>
+	/// <param name="autoFireEnabled">Auto fire enabled.</param>
+	/// <param name="fireRequested">Fire requested.</param>
+	public void DataAndActionUpdate( float deltaTime, bool autoFireEnabled, bool fireRequested )
 	{
-		_cannonController.Update( Time.deltaTime );
+		_cannonController.DataAndActionUpdate( deltaTime, autoFireEnabled, fireRequested );
 	}
 
 	/// <summary>

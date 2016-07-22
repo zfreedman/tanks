@@ -157,15 +157,18 @@ public class CannonController
 	}
 
 	/// <summary>
-	/// Update this instance.
+	/// Update the data and actions of this cannon.
 	/// </summary>
-	public void Update( float deltaTime )
+	/// <param name="deltaTime">Delta time.</param>
+	/// <param name="autoFireEnabled">Auto fire enabled.</param>
+	/// <param name="fireRequested">Fire requested.</param>
+	public void DataAndActionUpdate( float deltaTime, bool autoFireEnabled, bool fireRequested )
 	{
 		if( 0 < _timeTillCanFire )
 			_timeTillCanFire -= deltaTime;
 		if( _timeTillCanFire <= 0 )
 		{
-			if( GameInput.AutoFireEnabled || GameInput.FireRequested )
+			if( autoFireEnabled || fireRequested )
 				_queuedToFire = true;
 		}
 	}
